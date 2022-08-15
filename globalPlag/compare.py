@@ -1,6 +1,6 @@
 from sklearn.feature_extraction.text import HashingVectorizer #, CountVectorizer, TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-import text_preprocess as tp
+#import text_preprocess as tp
 
 def str_hash(string):
     string = ''.join(string)
