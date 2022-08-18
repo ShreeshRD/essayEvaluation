@@ -1,13 +1,10 @@
 import requests
 import urllib
-import pandas as pd
 from requests_html import HTML
 from requests_html import HTMLSession
-import urllib
 from googlesearch import search
-from bs4 import BeautifulSoup as bs
+import time
 
-#using this now:
 def get_source(url):
     try:
         session = HTMLSession()
@@ -18,13 +15,10 @@ def get_source(url):
 
 def scrape_google(query, num):
     query = urllib.parse.quote_plus(query)
-    response = get_source("https://www.google.co.uk/search?q=" + query)
+    response = get_source("https://www.google.com/search?q=" + query)
 
     links = list(response.html.absolute_links)
-    google_domains = ('https://www.google.',
-                      'https://google.',
-                      'https://policies.google.',
-                      'https://support.google.')
+    google_domains = ('https://www.google.', 'https://google.', 'https://webcache.googleusercontent.', 'http://webcache.googleusercontent.',        'https://policies.google.', 'https://support.google.', 'https://maps.google.', 'https:/youtube.com')
 
     for url in links[:]:
         if url.startswith(google_domains):
@@ -32,23 +26,11 @@ def scrape_google(query, num):
 
     return links[:num]
 
-#not using:
-def search_google(query):
-    return [link for link in search(query, tld='co.in', stop = 20)]
-
-def search_bing(query, num):
-    url = 'https://www.google.com/search?q=' + query
-    urls = []
-    page = requests.get(url, headers = {'User-agent': 'John Doe'})
-    soup = bs(page.text, 'html.parser')
-
-    for link in soup.find_all('a'):
-        url = str(link.get('href'))
-        if url.startswith('http'):
-            if not url.startswith('http://go.m') and not url.startswith('https://go.m') and url not in urls:
-                urls.append(url)
-    return urls[:num]
+def search_google(query, num):
+    return [link for link in search(query, tld='co.in', stop = num)]
 
 if __name__ == '__main__':
-    for link in scrape_google("Wikipedia", 10):
+    time.sleep(1)
+    q = '''Google LLC is an American multinational technology company that focuses on search engine technology, online advertising, cloud computing, computer software, quantum computing, e-commerce, artificial intelligence, and consumer electronics. It has been referred to as the "most powerful company in the world"[10] and one of the world's most valuable brands due to its market dominance, data collection, and technological advantages in the area of artificial intelligence. '''
+    for link in scrape_google(q, 2):
         print(link)
