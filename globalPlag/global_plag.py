@@ -1,5 +1,4 @@
 import nltk
-import pandas as pd
 import requests
 from bs4 import BeautifulSoup as bs
 import compare
@@ -19,34 +18,6 @@ def extract_text(url):
         res = None
     return res
 
-def purify_text(string):
-    stop_words = set(nltk.corpus.stopwords.words('english'))
-    words = nltk.word_tokenize(string)
-    return (" ".join([word for word in words if word not in stop_words]))
-
-def web_verify(string, results_per_sentence):
-    sentences = nltk.sent_tokenize(string)
-    matching_sites = []
-    for url in search_google.scrape_google(string, results_per_sentence):
-        matching_sites.append(url)
-    for sentence in sentences:
-        for url in search_google.scrape_google(sentence, results_per_sentence):
-            matching_sites.append(url)
-
-    return (list(set(matching_sites)))
-
-# def report(text):
-
-    # matching_sites = web_verify(purify_text(text), 20)
-    # matches = {}
-
-    # for i in range(len(matching_sites)):
-        # matches[matching_sites[i]] = compare.sim_score(text, extract_text(matching_sites[i])) * 100
-
-    # matches = {k: v for k, v in sorted(matches.items(), key=lambda item: item[1], reverse=True)}
-
-    # return matches
-    
 def report(text):
     res = {}
     txt_sent = nltk.sent_tokenize(text)
@@ -91,4 +62,3 @@ if __name__ == '__main__':
     for k, v in res.items():
         print(k, v, '\n')
     print('\ntime: ', tic)
-    
