@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="limiter">
+	<div class="container-login100">
+		<div>
+			<form class="login100-form validate-form flex-sb flex-w" method="POST" action="/takeInput">
+				<span class="login100-form-title p-b-51">
+					Input Text Here
+				</span>
+				<div class="wrap-input100 validate-input m-b-16" data-validate="Input text">
+					<textarea class="input100 big-text" type="text" name="input_text"></textarea>
+					<span class="focus-input100"></span>
+				</div>
+				<div class="container-login100-form-btn m-t-17">
+					<button class="login100-form-btn">
+						Submit
+					</button>
+				</div>
+			</form>
+			<div class="container-login100-form-btn m-t-17">
+				<button class="login100-form-btn">
+					<a class="login100-form-btn" href="/logout">Logout</a>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,3 @@
+Garbage Collector is the program running in the background that looks into all the objects in the memory and find out objects that are not referenced by any part of the program.
+Java Garbage Collection is the process to identify and remove the unused objects from the memory and free space.
+One of the best feature of java programming language is the automatic garbage collection, unlike other programming languages such as C where memory allocation is manually done.
