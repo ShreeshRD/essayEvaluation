@@ -1,13 +1,9 @@
-# Flask Login
+# AES UI
 
-Flask app to manage user login and registration.
+A Web Application implemented in python using FLASK. Takes in the document as input and generates a .txt file for evaluation.
   
 Setup:
 ```
-git clone https://github.com/bhuvansingla/flask-login.git
-cd flask-login
-virtualenv venv -p python3
-source venv/bin/activate
 pip3 install -r requirements.txt
 python3 app.py
 ```
