@@ -39,12 +39,7 @@ def report(text):
 def get_global_score(essay):
     scores = ''
     res = report(essay)
-    i = 0
-    for k,v in res.items():
-        if i > 5: break
-        scores += ('\n' + str(k) + ': ' + str(v))
-        i += 1
-    return scores
+    return res
 
 if __name__ == '__main__':
     tic = time.time()
