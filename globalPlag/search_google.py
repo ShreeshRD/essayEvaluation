@@ -1,8 +1,10 @@
+'''
+pip install requests-html
+'''
 import requests
 import urllib
 from requests_html import HTML
 from requests_html import HTMLSession
-from googlesearch import search
 import time
 
 def get_source(url):
@@ -26,11 +28,9 @@ def scrape_google(query, num):
 
     return links[:num]
 
-def search_google(query, num):
-    return [link for link in search(query, tld='co.in', stop = num)]
-
 if __name__ == '__main__':
     time.sleep(1)
     q = '''Google LLC is an American multinational technology company that focuses on search engine technology, online advertising, cloud computing, computer software, quantum computing, e-commerce, artificial intelligence, and consumer electronics. It has been referred to as the "most powerful company in the world"[10] and one of the world's most valuable brands due to its market dominance, data collection, and technological advantages in the area of artificial intelligence. '''
     for link in scrape_google(q, 2):
         print(link)
+
