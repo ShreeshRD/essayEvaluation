@@ -2,15 +2,13 @@ from flask import Flask, url_for, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 import os
 from werkzeug.utils import secure_filename
-from flask_uploads import UploadSet, IMAGES, configure_uploads
-from flask_wtf import FlaskForm
-from flask_wtf.file import FileField,FileRequired, FileAllowed
-from wtforms import SubmitField
+
+import OCR
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 
-UPLOAD_FOLDER = 'D:/capstone project/CODE/UI/AES-UI/uploads' #Change to your dir
+UPLOAD_FOLDER = 'D:/capstone project/CODE/UI/AES-UI/uploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 db = SQLAlchemy(app)
@@ -82,7 +80,9 @@ def takeImg():
         image = request.files["image"]
         print(image)
         image.save(os.path.join(app.config["UPLOAD_FOLDER"], image.filename))
-    return render_template("result.html")
+        text = OCR.getText(os.path.join(app.config["UPLOAD_FOLDER"], image.filename))
+        print(text)
+    return render_template("result.html", text=text)
 
 if(__name__ == '__main__'):
     app.secret_key = "ThisIsNotASecret:p"
