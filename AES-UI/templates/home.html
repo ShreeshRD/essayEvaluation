@@ -1,28 +1,48 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="limiter">
-	<div class="container-login100">
-		<div>
-			<form class="login100-form validate-form flex-sb flex-w" method="POST" action="/takeInput">
-				<span class="login100-form-title p-b-51">
-					Input Text Here
-				</span>
-				<div class="wrap-input100 validate-input m-b-16" data-validate="Input text">
-					<textarea class="input100 big-text" type="text" name="input_text"></textarea>
-					<span class="focus-input100"></span>
-				</div>
-				<div class="container-login100-form-btn m-t-17">
-					<button class="login100-form-btn">
-						Submit
-					</button>
-				</div>
-			</form>
-			<div class="container-login100-form-btn m-t-17">
-				<button class="login100-form-btn">
-					<a class="login100-form-btn" href="/logout">Logout</a>
-				</button>
+<body class="bg-grad">
+	<div class="limiter">
+		<nav class="navbar navbar-expand-lg bg-nav-grad">
+			<div class="container-fluid">
+			<a class="navbar-brand text-light" href="#">Question Sets</a>
+			<a class="btn btn-outline-dark btn-lg" href="/logout">Logout</a>
 			</div>
-		</div>
+		</nav>
+		<h2 class="display-5" style="padding-left: 112px; padding-top: 30px; padding-bottom: 30px;">
+			Pick a topic:
+		</h2>
+		<table class="table" style="margin: auto; width: 85%; font-size: large;">
+			<thead>
+				<tr style="background-color: #355dca; -webkit-text-fill-color: #dcdfe6; font-weight: 900;">
+					<th scope="col">#</th>
+					<th scope="col">Question</th>
+					<th scope="col">Min Score</th>
+					<th scope="col">Max Score</th>
+				</tr>
+			</thead>
+			{% for prompt in prompts %}
+				<tr class="clickable-row" data-href="/prompt/{{prompt.id}}">
+					<th scope="row">{{ prompt.id }}</th>
+					<td>{{ prompt.question}}</td>
+					<td>{{ prompt.min_marks }}</td>
+					<td>{{ prompt.max_marks }}</td>
+				</tr>
+			{% endfor %}
+		</table>
+		<style type="text/css">
+			.clickable-row:hover {
+				background-color: #56a6f1;
+				cursor: pointer;
+			}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script>
+			jQuery(document).ready(function($) {
+			$(".clickable-row").click(function() {
+				window.location = $(this).data("href");
+			});
+		});
+		</script>
 	</div>
-</div>
+</body>
 {% endblock %}

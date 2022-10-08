@@ -1,20 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-	<div class="limiter">
+	<div class="limiter bg-grad">
 		<div class="container-login100">
-			<div class="wrap-login100 p-t-50 p-b-90">
+			<div class="wrap-login100 p-t-50 p-b-50">
 					<span class="login100-form-title p-b-51">
 						{{ message }}
 					</span>
-					<div class="container-login100-form-btn m-t-17">
-						<button class="login100-form-btn">
+					<div class="container-login100-form-btn m-t-17" style="margin: auto; width: 75%; padding-top: 30px;">
 							<a class="login100-form-btn" href="{{ url_for('login')}}">Login</a>
-						</button>
 					</div>
-					<div class="container-login100-form-btn m-t-17">
-						<button class="login100-form-btn">
-							<a class="login100-form-btn" href="{{ url_for('register')}}">Register</a>
-						</button>	
+					<div class="container-login100-form-btn m-t-17" style="margin: auto; width: 75%; padding-top: 20px;">
+						<a class="login100-form-btn" href="{{ url_for('register')}}">Register</a>
 					</div>
 			</div>
 		</div>
