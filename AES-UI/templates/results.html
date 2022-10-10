@@ -1,22 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="limiter">
-	<div class="container-login100">
-		<div>
-			<span class="login100-form-title p-b-51">
-				Your grades are {{ res }} / 30
-			</span>
-			<div class="container-login100-form-btn m-t-17">
-				<button class="login100-form-btn">
-					<a class="login100-form-btn" href="/">Submit another essay</a>
-				</button>
-			</div>
-			<div class="container-login100-form-btn m-t-17">
-				<button class="login100-form-btn">
-					<a class="login100-form-btn" href="/logout">Logout</a>
-				</button>
-			</div>
+	<nav class="navbar navbar-expand-lg bg-nav-grad">
+		<div class="container-fluid">
+		  <a class="btn btn-outline-dark btn-lg" style="color: #f0f0f0;" href="/">Home</a>
+		  <a class="btn btn-outline-dark btn-lg" href="/logout">Logout</a>
 		</div>
+	</nav>
+	<br/>
+	<br/>
+	<div class="testwrap" style="margin: auto; width: 50%; text-align: center;">
+		<h2 class="display-5" style="padding-top: 50px; padding-bottom: 50px;">
+			Your grades are {{ res }}:
+		</h2>
+	</div>
+	<br/>
+	<div class="testwrap" style="margin: auto; width: 50%; text-align: center;">
+		<h2 class="display-5" style="padding-top: 50px; padding-bottom: 50px;">
+			Your local plag score is: {{ loc }}:
+		</h2>
+	</div>
+	<br/>
+	<div class="testwrap" style="margin: auto; width: 50%; text-align: center;">
+		<h2 class="display-5" style="padding-top: 50px; padding-bottom: 50px;">
+			Your global plag results is {{ glob }}:
+		</h2>
 	</div>
 </div>
 {% endblock %}
