@@ -1,22 +1,31 @@
-/*Defined by Shreesh*/
-.lime{
-  background: #A1FFCE;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #FAFFD1, #A1FFCE);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #FAFFD1, #A1FFCE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
+/*Defined by Siddhi         #000000*/
 
 .bg-grad{
-  background: #E0EAFC;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #CFDEF3, #E0EAFC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #e6e6ff;
+  background: -webkit-linear-gradient(to right, #e6e6ff, #e6e6ff);
+  background: linear-gradient(to right, #e6e6ff, #e6e6ff);
 }
 
 .bg-nav-grad{
-  background: #00d2ff;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #928DAB, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #928DAB, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #00d2ff;
+  background: -webkit-linear-gradient(to right, #5c557f, #928DAB);
+  background: linear-gradient(to right,#5c557f, #928DAB);
 }
 
+/*Defined by Shreesh        #382692*/
+/*
+.bg-grad{
+  background: #E0EAFC;
+  background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);
+  background: linear-gradient(to right, #CFDEF3, #E0EAFC);
+}
+
+.bg-nav-grad{
+  background: #00d2ff;
+  background: -webkit-linear-gradient(to right, #928DAB, #00d2ff);
+  background: linear-gradient(to right, #382692, #5ec9e0);
+}
+*/
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
@@ -93,9 +102,14 @@ li {
 
 
 /*---------------------------------------------*/
+
 input {
   outline: none;
   border: none;
+}
+
+input[type="file"] {
+  display: none;
 }
 
 textarea {
@@ -108,7 +122,7 @@ textarea {
 
 textarea:focus,
 input:focus {
-  border-color: transparent !important;
+  border-color: transparent;
 }
 
 input::-webkit-input-placeholder {
@@ -202,12 +216,16 @@ iframe {
   ;
 }
 
+.testwrap {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
 
 .wrap-login100 {
   width: 390px;
   background: #fff;
   border-radius: 10px;
   position: relative;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
 
@@ -482,11 +500,15 @@ iframe {
   height: 300px;
   padding: 12px 20px;
   box-sizing: border-box;
-  border: 2px solid #ccc;
+  border: 1px solid #393939;
   border-radius: 4px;
-  background-color: #f8f8f8;
+  background-color: #e6edfb;
   font-size: 16px;
   resize: none;
+}
+
+.big-text:focus {
+  border: 1px solid #393939;
 }
 
 /*//////////////////////////////////////////////////////////////////
