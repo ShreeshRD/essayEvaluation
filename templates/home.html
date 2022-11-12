@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<body>
+	<div class="limiter">
+		<nav class="navbar navbar-expand-lg bg-nav-grad">
+			<div class="container-fluid">
+			<p class="navbar-brand text-light" href="#">Question Sets</p>
+			<a class="btn btn-outline-dark btn-lg" href="/logout">Logout</a>
+			</div>
+		</nav>
+		<h2 class="display-5" style="padding-left: 112px; padding-top: 30px; padding-bottom: 30px;">
+			Pick a topic:
+		</h2>
+		<table class="table testwrap" style="margin: auto; width: 85%; font-size: large;">
+			<thead>
+				<tr style="background-color: #000000; -webkit-text-fill-color: #dcdfe6; font-weight: 900;">
+					<th scope="col">#</th>
+					<th scope="col">Question</th>
+					<th scope="col">Min Score</th>
+					<th scope="col">Max Score</th>
+				</tr>
+			</thead>
+			{% for prompt in prompts %}
+				<tr class="clickable-row" data-href="/prompt/{{prompt.id}}">
+					<th scope="row">{{ prompt.id }}</th>
+					<td>{{ prompt.question}}</td>
+					<td>{{ prompt.min_marks }}</td>
+					<td>{{ prompt.max_marks }}</td>
+				</tr>
+			{% endfor %}
+		</table>
+		<style type="text/css">
+			.clickable-row:hover {
+				background-color: #ffffff;
+				cursor: pointer;
+			}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script>
+			jQuery(document).ready(function($) {
+			$(".clickable-row").click(function() {
+				window.location = $(this).data("href");
+			});
+		});
+		</script>
+	</div>
+</body>
+{% endblock %}
