@@ -1,2 +1,0 @@
-# essayEvaluation
-Capstone project
