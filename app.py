@@ -6,6 +6,7 @@ from PIL import Image
 import pytesseract
 import scripts.globalPlag.global_plag as gplag
 import scripts.localPlag.local_plag as lplag
+import time
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///aes.db'
@@ -16,7 +17,6 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
-
     def __init__(self, username, password):
         self.username = username
         self.password = password
@@ -28,10 +28,6 @@ class Prompts(db.Model):
     min_marks = db.Column(db.Integer)
     max_marks = db.Column(db.Integer)
     source_essay = db.Column(db.String(100))
-
-# class Source(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     essay = db.Column(db.String(2000))
 
 @app.route('/', methods=['GET'])
 def index():
@@ -98,25 +94,37 @@ def logout():
 @app.route('/results/',methods=['POST'])
 def takeInput():
     t = request.form['input_text']
+    session["essay"] = t
     name = session["uname"]
     no = str(session['prompt_no'])
     d_file = open("uploads/"+no+"/%s.txt" %name,"w+")
     d_file.write(t)
     d_file.close()
     score = evaluate(t)
-    # if len(t.split()) > 5:
-    #     gscore = gplag.get_global_score(t)
-    # else:
-    gscore = """In a small saucepan, add finely chopped dark chocolate and a splash of cocoa powder. Stir occasionally until melted. ('https://www.maderatribune.com/single-post/chocolate-goes-international', 48.50712500726658)
-
-While waiting for that to melt, mix together cornstarch with a small splash of whole milk. Once chocolate is melted, add the rest of your milk slowly while constantly whisking. ('https://flavouronline.co.za/how-to-make-the-best-hot-chocolate-of-all-time/', 91.70205237216021)
-
-Continue to heat until all of it is nice and hot. Then whisk in the cornstarch slurry. ('https://wellversed.in/blogs/articles/is-corn-starch-gluten-free', 50.09794328681196)
-
-Continue to heat until thickened. Pour into a mug, topped with whipped cream and dust with cocoa powder. ('https://www.telegraphindia.com/culture/food/recipes-mother-s-day-specials/cid/1771655', 47.836487323494005)"""
     path = '.\\uploads\\'
-    lscore = str(lplag.check_plagiarism(path+no))
-    return render_template('results.html', res = score, loc = lscore, glob = gscore)
+    l_results = lplag.check_plagiarism(path+no)
+    lscore = ''
+    for ele in l_results:
+        if name in ele:
+            out = str(ele).replace('.txt', '')
+            lscore += out.replace(name, '') + '<br/>'
+    session["score"] = max(score)
+    session["lscore"] = lscore
+    return render_template('results.html', res = max(score), loc = lscore)
+
+@app.route('/global', methods=['POST'])
+def background_process_test():
+    t = session["essay"]
+    if len(t.split()) > 5:
+        tic = time.time()
+        time.sleep(10)
+        gscore = gplag.get_global_score(t)#'text --> 77% match with link: <a style="text-decoration: underline;" class="display-5">link<a/>"'# gplag.get_global_score(t)
+        tic = time.time() - tic
+    else:
+        gscore = 0
+        time.sleep(5)
+        tic = 0
+    return render_template('global.html', glob = gscore, time = tic)
 
 if(__name__ == '__main__'):
     app.secret_key = "ThisIsNotASecret:p"
