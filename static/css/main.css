@@ -1,5 +1,5 @@
 /*Defined by Siddhi         #000000*/
-
+/*
 .bg-grad{
   background: #e6e6ff;
   background: -webkit-linear-gradient(to right, #e6e6ff, #e6e6ff);
@@ -11,9 +11,9 @@
   background: -webkit-linear-gradient(to right, #5c557f, #928DAB);
   background: linear-gradient(to right,#5c557f, #928DAB);
 }
-
+*/
 /*Defined by Shreesh        #382692*/
-/*
+
 .bg-grad{
   background: #E0EAFC;
   background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);
@@ -25,7 +25,7 @@
   background: -webkit-linear-gradient(to right, #928DAB, #00d2ff);
   background: linear-gradient(to right, #382692, #5ec9e0);
 }
-*/
+
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
@@ -57,7 +57,7 @@ html {
 /*---------------------------------------------*/
 a {
   font-family: Ubuntu-Regular;
-  font-size: 14px;
+  font-size: 30px;
   line-height: 1.7;
   color: #666666;
   margin: 0px;
@@ -74,6 +74,24 @@ a:focus {
 a:hover {
   text-decoration: none;
   color: #403866;
+}
+
+div#loading {
+  width: 35px;
+  height: 35px;
+  display: none;
+  background: url(/static/loadingimage.gif) no-repeat;
+  cursor: wait;
+  }
+
+.vertical-center {
+  width: 256px;
+  height: 47px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -128px;
+  margin-top: -24px;
 }
 
 /*---------------------------------------------*/
