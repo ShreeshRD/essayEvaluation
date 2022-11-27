@@ -11,20 +11,39 @@
 	<br/>
 	<div class="testwrap" style="margin: auto; width: 50%; text-align: center;">
 		<h2 class="display-5" style="padding-top: 50px; padding-bottom: 50px;">
-			Your grades are {{ res }}:
+			Your grades are {{ res }}
 		</h2>
 	</div>
 	<br/>
-	<div class="testwrap" style="margin: auto; width: 50%; text-align: center;">
-		<h2 class="display-5" style="padding-top: 50px; padding-bottom: 50px;">
-			Your local plag score is: {{ loc }}:
-		</h2>
+	<p style="text-align: center; padding-top: 20px; padding-bottom: 10px; padding-right: 25px;">
+		<a class="btn-lg btn-dark dropdown-toggle" data-bs-toggle="collapse" href="#localCollapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+			Local Plagiarism
+		</a>
+	</p>
+	<div class="collapse" id="localCollapse">
+		<div class="card-body bg-grad">
+			<div style="margin: auto; width: 80%;">
+				{% if loc == ''%}
+					<div class="testwrap" style="margin: auto; width: 50%; text-align: center;">
+						<h2 class="display-5" style="padding-top: 50px; padding-bottom: 50px;">
+							No Local Plagiarism detected
+						</h2>
+					</div>
+				{% else %}
+					<div class="testwrap" style="margin: auto; width: 50%; text-align: center;">
+						<h2 class="display-5" style="padding-top: 50px; padding-bottom: 50px;">
+							{{ loc|safe }}
+						</h2>
+					</div>
+				{% endif %}
+			</div>
+		</div>
 	</div>
 	<br/>
-	<div class="testwrap" style="margin: auto; width: 50%; text-align: center;">
-		<h2 class="display-5" style="padding-top: 50px; padding-bottom: 50px;">
-			Your global plag results is {{ glob }}:
-		</h2>
-	</div>
+	<form class="validate-form" method="POST" target="_blank" action="/global" style="text-align: center; margin: auto; padding-bottom: 20px;">
+		<button class="btn btn-outline-dark btn-lg" style="margin: auto; width: 20%; text-align: center;">
+			Get global plagiarism report
+		</button>
+	</form>
 </div>
 {% endblock %}

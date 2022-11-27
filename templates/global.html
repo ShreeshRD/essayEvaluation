@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 style="text-align: center; padding-top: 20px; padding-bottom: 10px; padding-right: 30px;">
+	<b>Report</b>
+</h1>
+<div style="margin: auto; width: 80%;">
+	<div id="content" class="testwrap" style="margin: auto; width: 90%; text-align: center;">
+		<h2 class="display-5" style="padding-top: 50px; padding-bottom: 50px;">
+			Plagiarised lines:<br/>
+			{{ glob|safe }}<br/>
+		</h2>
+	</div>
+</div>
+<footer><p class="fixed-bottom" style="text-align:left;">Time taken: {{ time }}</p></footer>
+{% endblock %}

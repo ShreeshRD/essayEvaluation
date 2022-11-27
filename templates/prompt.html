@@ -5,7 +5,8 @@
 		<meta name=Generator content="Microsoft Word 15 (filtered)">
 	</head>
 	<body lang=EN-IN link=blue vlink=purple style='word-wrap:break-word'>
-	<div>
+	<div id="loading" class="vertical-center" style="width: 256px; height: 47px"></div>
+	<div id="content">
 		<nav class="navbar navbar-expand-lg bg-nav-grad">
 			<div class="container-fluid">
 			  <a class="btn btn-outline-dark btn-lg" style="color: #f0f0f0;" href="/">Home</a>
@@ -54,8 +55,8 @@
 			<div class="wrap-input100 validate-input m-b-16" data-validate="Input text" style="width: 95%; margin: auto;">
 				<textarea class="input100 big-text" type="text" name="input_text">{{ocr}}</textarea>
 			</div>
-			<div class="container-login100-form-btn m-t-17">
-				<button class="btn btn-outline-dark btn-lg" style="margin: auto; width: 20%;">
+			<div id="content" class="container-login100-form-btn m-t-17">
+				<button class="btn btn-outline-dark btn-lg" style="margin: auto; width: 20%;" onclick="loading();">
 					Submit
 				</button>
 			</div>
