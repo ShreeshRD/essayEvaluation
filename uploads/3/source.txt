@@ -1,0 +1,1 @@
+Write a response that explains how the features of the setting affect the cyclist. In your response, include examples from the essay that support your conclusion.

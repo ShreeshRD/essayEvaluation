@@ -15,12 +15,18 @@ bcrypt = Bcrypt(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100))
+    t_user = db.Column(db.String(100), unique=True)
+    t_pass = db.Column(db.String(100))
+    def __init__(self, t_user, t_pass):
+        self.t_user = t_user
+        self.t_pass = t_pass
+class Teacher(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    t_user = db.Column(db.String(100))
+    t_pass = db.Column(db.String(100))
     def __init__(self, username, password):
-        self.username = username
-        self.password = password
-
+        self.t_user = t_user
+        self.t_pass = t_pass
 class Prompts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(db.String(100))
@@ -31,7 +37,9 @@ class Prompts(db.Model):
 
 @app.route('/', methods=['GET'])
 def index():
-    if session.get('logged_in'):
+    if session.get('isTeacher'):
+        return render_template('teacher_portal.html')
+    elif session.get('logged_in'):
         prs = Prompts.query.all()
         return render_template('home.html', prompts = prs)
     else:
@@ -84,11 +92,25 @@ def login():
             session['logged_in'] = True
             return redirect(url_for('index'))
         return render_template('index.html', message="Incorrect Details")
-
+@app.route('/teacher_login/', methods=['GET', 'POST'])
+def teacher_login():
+    if request.method == 'GET':
+        return render_template('teacher.html')
+    else:
+        u = request.form['username']
+        p = request.form['password']
+        session["uname"] = u
+        data = Teacher.query.filter_by(t_user=u, t_pass=p).first()
+        if data is not None:
+            session['logged_in'] = True
+            session['isTeacher'] = True
+            return redirect(url_for('index'))
+        return render_template('index.html', message="Incorrect Details")
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     session['logged_in'] = False
+    session['isTeacher'] = False
     return redirect(url_for('index'))
 
 @app.route('/results/',methods=['POST'])
@@ -102,15 +124,19 @@ def takeInput():
     d_file.close()
     score = evaluate(t)
     path = '.\\uploads\\'
-    l_results = lplag.check_plagiarism(path+no)
+    l_results, flag1 = lplag.check_plagiarism(path+no)
     lscore = ''
     for ele in l_results:
         if name in ele:
             out = str(ele).replace('.txt', '')
             lscore += out.replace(name, '') + '<br/>'
-    session["score"] = max(score)
+    score = max(score)
+    if(flag1 == 1):
+        score = "0 - Please enter a valid answer."
+        lscore = "N/A"
+    session["score"] = score
     session["lscore"] = lscore
-    return render_template('results.html', res = max(score), loc = lscore)
+    return render_template('results.html', res = score, loc = lscore)
 
 @app.route('/global', methods=['POST'])
 def background_process_test():
