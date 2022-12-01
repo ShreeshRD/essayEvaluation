@@ -18,8 +18,8 @@ class User(db.Model):
     username = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     def __init__(self, username, password):
-        self.t_user = username
-        self.t_pass = password
+        self.username = username
+        self.password = password
 class Teacher(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     t_user = db.Column(db.String(100))
