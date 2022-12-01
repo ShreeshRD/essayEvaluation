@@ -14,7 +14,7 @@ from matplotlib import pyplot as plt
 2. pip install pytesseract
 3. Change path below
 '''
-pytesseract.pytesseract.tesseract_cmd = 'D:/program files/Tesseract-OCR/tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = 'C:/Users/Shreesh/AppData/Local/Tesseract-OCR/tesseract.exe'
 
 def display(im_path):
     dpi = 80
