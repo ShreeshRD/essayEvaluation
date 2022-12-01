@@ -15,16 +15,16 @@ bcrypt = Bcrypt(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    t_user = db.Column(db.String(100), unique=True)
-    t_pass = db.Column(db.String(100))
-    def __init__(self, t_user, t_pass):
-        self.t_user = t_user
-        self.t_pass = t_pass
+    username = db.Column(db.String(100), unique=True)
+    password = db.Column(db.String(100))
+    def __init__(self, username, password):
+        self.t_user = username
+        self.t_pass = password
 class Teacher(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     t_user = db.Column(db.String(100))
     t_pass = db.Column(db.String(100))
-    def __init__(self, username, password):
+    def __init__(self, t_user, t_pass):
         self.t_user = t_user
         self.t_pass = t_pass
 class Prompts(db.Model):
