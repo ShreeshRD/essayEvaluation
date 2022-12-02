@@ -12,16 +12,43 @@
         </nav>
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="#">View Results for Prompt 1</a>
-            <a href="#">View Results for Prompt 2</a>
-            <a href="#">View Results for Prompt 3</a>
-            <a href="#">View Results for Prompt 4</a>
-            <a href="#">View Results for Prompt 5</a>
-            <a href="#">View Results for Prompt 6</a>
-            <a href="#">View Results for Prompt 7</a>
-            <a href="#">View Results for Prompt 8</a>
+            <a href="/teacher/1">View Results for Prompt 1</a>
+            <a href="/teacher/2">View Results for Prompt 2</a>
+            <a href="/teacher/3">View Results for Prompt 3</a>
+            <a href="/teacher/4">View Results for Prompt 4</a>
+            <a href="/teacher/5">View Results for Prompt 5</a>
+            <a href="/teacher/6">View Results for Prompt 6</a>
+            <a href="/teacher/7">View Results for Prompt 7</a>
+            <a href="/teacher/8">View Results for Prompt 8</a>
         </div>
-
+        {%if res != '' %}
+        <div class="center">
+            <table class="table table-hover table-borderless">
+                <thead>
+                    <tr>
+                        <th scope="row">#</th>
+                        <th>Student Name</th>
+                        <th>Essay Score</th>
+                        <th>Plagiarism Score</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for i in range(0, res|length)%}
+                    <tr>
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{res[i][0]}}</td>
+                        <td>{{res[i][1]}}</td>
+                        <td>{{res[i][2]}}</td>
+                        <td><a class="btn btn-info" href='{{ request.path }}/{{res[i][0]}}' target='_blank'>View
+                                Essay</a>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
 
         <script>
             function openNav() {

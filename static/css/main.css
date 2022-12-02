@@ -592,5 +592,33 @@ iframe {
   }
 }
 
+.center {
+  margin: auto;
+  width: 75%;
+  border: 3px solid;
+  padding: 0px;
+  margin-top: 100px;
+}
+
+.eshow {
+  margin: auto;
+  width: 75%;
+  border: 3px solid;
+  padding: 0px;
+  margin-top: 100px;
+  background-color: white;
+  font-family: Monospace;
+
+}
+
+.paddd {
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 0px;
+  padding-left: 80px;
+}
+
+
+
 /*//////////////////////////////////////////////////////////////////
 [ Responsive ]*/

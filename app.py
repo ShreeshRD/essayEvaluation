@@ -7,7 +7,7 @@ import pytesseract
 import scripts.globalPlag.global_plag as gplag
 import scripts.localPlag.local_plag as lplag
 import time
-
+import csv
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///aes.db'
 db = SQLAlchemy(app)
@@ -38,7 +38,7 @@ class Prompts(db.Model):
 @app.route('/', methods=['GET'])
 def index():
     if session.get('isTeacher'):
-        return render_template('teacher_portal.html')
+        return render_template('teacher_portal.html', res= '')
     elif session.get('logged_in'):
         prs = Prompts.query.all()
         return render_template('home.html', prompts = prs)
@@ -107,6 +107,23 @@ def teacher_login():
             return redirect(url_for('index'))
         return render_template('index.html', message="Incorrect Details")
 
+@app.route('/teacher/<int:sid>', methods=['POST', 'GET'])
+def teach_res(sid):
+    filename = "uploads/"+str(sid)+"/report.csv"
+    res = []
+    with open(filename, 'r') as csvfile:
+        csvreader = csv.reader(csvfile)
+        for row in csvreader:
+            res.append(row)
+    return render_template('teacher_portal.html', res = res)
+
+@app.route('/teacher/<int:sid>/<string:sname>', methods=['POST', 'GET'])
+def show_essay(sid,sname):
+    essay = open("uploads/"+str(sid)+"/%s.txt" %sname,"r")
+    t = essay.read()
+    essay.close()
+    return render_template('show_essay.html', content = t, name = sname)
+
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     session['logged_in'] = False
@@ -136,6 +153,16 @@ def takeInput():
         lscore = "N/A"
     session["score"] = score
     session["lscore"] = lscore
+
+    #writing into results
+    if(lscore == ''):
+        res = [name, score, 'N/A']
+    else:
+        res = [name, score, lscore]
+    filename = "uploads/"+no+"/report.csv"
+    with open(filename, 'a') as csvfile: 
+        csvwriter = csv.writer(csvfile)
+        csvwriter.writerow(res)
     return render_template('results.html', res = score, loc = lscore)
 
 @app.route('/global', methods=['POST'])

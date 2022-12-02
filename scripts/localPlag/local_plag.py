@@ -30,7 +30,7 @@ def check_plagiarism(path):
             if sim_score < 0.3:
                 continue
             student_pair = (s_vectors[i][0], s_vectors[j][0])
-            if(sim_score > 0.9):
+            if(sim_score == 1):
                 if(s_vectors[i][0] == "source.txt" or s_vectors[j][0] == "source.txt"):
                     flag = 1
             score = [round(sim_score * 100,2),"% similarity between students",student_pair]
