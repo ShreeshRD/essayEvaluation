@@ -115,7 +115,7 @@ def teach_res(sid):
         csvreader = csv.reader(csvfile)
         for row in csvreader:
             res.append(row)
-        res = res[:-1]
+        #res = res[:-1]
     return render_template('teacher_portal.html', res = res)
 
 @app.route('/teacher/<int:sid>/<string:sname>', methods=['POST', 'GET'])
@@ -142,16 +142,18 @@ def takeInput():
     d_file.close()
     score = evaluate(t)
     path = '.\\uploads\\'
-    l_results, flag1 = lplag.check_plagiarism(path+no)
+    l_results= lplag.check_plagiarism(path+no)
     lscore = ''
     for ele in l_results:
         if name in ele:
             out = str(ele).replace('.txt', '')
             lscore += out.replace(name, '') + '<br/>'
     score = max(score)
-    if(flag1 == 1):
+    print(lscore)
+    if("source" in lscore):
         score = "0 - Please enter a valid answer."
         lscore = "N/A"
+    
     session["score"] = score
     session["lscore"] = lscore
 

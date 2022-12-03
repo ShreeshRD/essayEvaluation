@@ -15,7 +15,6 @@ def similarity(doc1, doc2): return cosine_similarity([doc1, doc2])
 def check_plagiarism(path):
     user_files = os.listdir(path)
     user_notes = []
-    flag = 0
     for filename in user_files:
         with open(path+'\\'+filename, 'r') as file:
             user_notes.append(txt_prep(file.read()))
@@ -30,12 +29,9 @@ def check_plagiarism(path):
             if sim_score < 0.3:
                 continue
             student_pair = (s_vectors[i][0], s_vectors[j][0])
-            if(sim_score == 1):
-                if(s_vectors[i][0] == "source.txt" or s_vectors[j][0] == "source.txt"):
-                    flag = 1
-            score = [round(sim_score * 100,2),"% similarity between students",student_pair]
+            score = str(round(sim_score * 100,2))+"% similarity with "+str(student_pair[0])+str(student_pair[1])
             plagiarism_results.append(score)
-    return plagiarism_results, flag
+    return plagiarism_results
 
 def get_local_score(path, name, n):
     os.chdir(path)

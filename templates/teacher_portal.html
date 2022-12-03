@@ -22,10 +22,10 @@
             <a href="/teacher/8">View Results for Prompt 8</a>
         </div>
         {%if res != '' %}
-        <div class="center">
-            <table class="table table-hover table-borderless">
+        <div style="padding-top: 100px;">
+            <table class="table testwrap" style="margin: auto; width: 85%; font-size: large;">
                 <thead>
-                    <tr>
+                    <tr style="background-color: #382692; -webkit-text-fill-color: #dcdfe6; font-weight: 900;">
                         <th scope="row">#</th>
                         <th>Student Name</th>
                         <th>Essay Score</th>
@@ -39,7 +39,7 @@
                         <th scope="row">{{i+1}}</th>
                         <td>{{res[i][0]}}</td>
                         <td>{{res[i][1]}}</td>
-                        <td>{{res[i][2]}}</td>
+                        <td>{{res[i][2] | safe}}</td>
                         <td><a class="btn btn-info" href='{{ request.path }}/{{res[i][0]}}' target='_blank'>View
                                 Essay</a>
                         </td>
