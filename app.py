@@ -161,7 +161,7 @@ def takeInput():
         res = [name, score, lscore]
     filename = "uploads/"+no+"/report.csv"
     with open(filename, 'a') as csvfile: 
-        csvwriter = csv.writer(csvfile)
+        csvwriter = csv.writer(csvfile, lineterminator='\n')
         csvwriter.writerow(res)
     return render_template('results.html', res = score, loc = lscore)
 
