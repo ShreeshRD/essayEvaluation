@@ -5,8 +5,9 @@ from flask_bcrypt import Bcrypt
 from PIL import Image
 import pytesseract
 import scripts.globalPlag.global_plag as gplag
-import scripts.localPlag.local_plag as lplag
+import scripts.localPlag.fake_lpag as lplag
 import time
+import csv
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///aes.db'
@@ -20,7 +21,13 @@ class User(db.Model):
     def __init__(self, username, password):
         self.username = username
         self.password = password
-
+class Teacher(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    t_user = db.Column(db.String(100))
+    t_pass = db.Column(db.String(100))
+    def __init__(self, t_user, t_pass):
+        self.t_user = t_user
+        self.t_pass = t_pass
 class Prompts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(db.String(100))
@@ -31,7 +38,9 @@ class Prompts(db.Model):
 
 @app.route('/', methods=['GET'])
 def index():
-    if session.get('logged_in'):
+    if session.get('isTeacher'):
+        return render_template('teacher_portal.html', res= '')
+    elif session.get('logged_in'):
         prs = Prompts.query.all()
         return render_template('home.html', prompts = prs)
     else:
@@ -84,11 +93,43 @@ def login():
             session['logged_in'] = True
             return redirect(url_for('index'))
         return render_template('index.html', message="Incorrect Details")
+@app.route('/teacher_login/', methods=['GET', 'POST'])
+def teacher_login():
+    if request.method == 'GET':
+        return render_template('teacher.html')
+    else:
+        u = request.form['username']
+        p = request.form['password']
+        session["uname"] = u
+        data = Teacher.query.filter_by(t_user=u, t_pass=p).first()
+        if data is not None:
+            session['logged_in'] = True
+            session['isTeacher'] = True
+            return redirect(url_for('index'))
+        return render_template('index.html', message="Incorrect Details")
 
+@app.route('/teacher/<int:sid>', methods=['POST', 'GET'])
+def teach_res(sid):
+    filename = "uploads/"+str(sid)+"/report.csv"
+    res = []
+    with open(filename, 'r') as csvfile:
+        csvreader = csv.reader(csvfile)
+        for row in csvreader:
+            res.append(row)
+        #res = res[:-1]
+    return render_template('teacher_portal.html', res = res)
+
+@app.route('/teacher/<int:sid>/<string:sname>', methods=['POST', 'GET'])
+def show_essay(sid,sname):
+    essay = open("uploads/"+str(sid)+"/%s.txt" %sname,"r")
+    t = essay.read()
+    essay.close()
+    return render_template('show_essay.html', content = t, name = sname)
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     session['logged_in'] = False
+    session['isTeacher'] = False
     return redirect(url_for('index'))
 
 @app.route('/results/',methods=['POST'])
@@ -102,15 +143,27 @@ def takeInput():
     d_file.close()
     score = evaluate(t)
     path = '.\\uploads\\'
-    l_results = lplag.check_plagiarism(path+no)
+    l_results = lplag.lscores(name, t, "C:/Users/Shreesh/Programs/Capstone/Project/uploads/"+no)
     lscore = ''
     for ele in l_results:
-        if name in ele:
-            out = str(ele).replace('.txt', '')
-            lscore += out.replace(name, '') + '<br/>'
+        if "source" in ele and int(ele[:2]) > 90:
+            score = "0 - Please enter a valid answer."
+            lscore = "N/A"
+            break
+        lscore += ele + '<br/>'
     session["score"] = max(score)
     session["lscore"] = lscore
-    return render_template('results.html', res = max(score), loc = lscore)
+
+    #writing into results
+    if(lscore == ''):
+        res = [name, score, 'N/A']
+    else:
+        res = [name, score, lscore]
+    filename = "uploads/"+no+"/report.csv"
+    with open(filename, 'a') as csvfile: 
+        csvwriter = csv.writer(csvfile, lineterminator='\n')
+        csvwriter.writerow(res)
+    return render_template('results.html', res = score, loc = lscore)
 
 @app.route('/global', methods=['POST'])
 def background_process_test():
@@ -118,7 +171,7 @@ def background_process_test():
     if len(t.split()) > 5:
         tic = time.time()
         time.sleep(10)
-        gscore = gplag.get_global_score(t)#'text --> 77% match with link: <a style="text-decoration: underline;" class="display-5">link<a/>"'# gplag.get_global_score(t)
+        gscore = gplag.get_global_score(t)#'text --> 77% match with link: <a style="text-decoration: underline;" class="display-5">link<a/>"'
         tic = time.time() - tic
     else:
         gscore = 0

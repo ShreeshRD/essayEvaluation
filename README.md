@@ -7,11 +7,8 @@ A Web Application implemented in python using FLASK. Takes in the document as in
   
 Setup:
 ```
-pip install -r requirements.txt
-```
-To Launch:
-```
-python app.py
+pip3 install -r requirements.txt
+python3 app.py
 ```
 
 Then open ```http://localhost:5000/``` in a web-browser.

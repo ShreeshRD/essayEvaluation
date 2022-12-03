@@ -8,36 +8,24 @@ def str_hash(string):
 
 def sim_score(pat, txt,):
     vectorizer = HashingVectorizer()
-    txt = txt.split(' ')
-    #tp.txt_prep(txt) # split into words
-    pat = pat.split(' ')
-    #tp.txt_prep(pat)
-    #print('\npattern:\n', pat)
-    #print('\ntext:\n', txt, '\n\n\n')
-    m = len(pat)
-    n = len(txt)
+    txt = txt.split(' '); pat = pat.split(' ')
+    m = len(pat); n = len(txt)
     res = 0
-    p_hsh = str_hash(pat)
-    t_hsh = str_hash(txt[:m])
+    p_hsh = str_hash(pat); t_hsh = str_hash(txt[:m])
     p_vec = vectorizer.fit_transform([' '.join(pat)]).toarray()
     
     if abs(p_hsh - t_hsh) < 10 * m:
         t_vec = vectorizer.fit_transform([' '.join(txt[:m])]).toarray()
         score = cosine_similarity(p_vec, t_vec)[0][0]
         res = max(res, score)
-        # print(txt[:m], score)
-        # print(t_hsh)
     
     for i in range(n - m):
         t_hsh -= str_hash(txt[i])
         t_hsh += str_hash(txt[i + m])
-        #print(txt[i],txt[i+m], txt[i+1:i+m+1])
-        if abs(p_hsh - t_hsh) <= 10 * m: # chk similar hsh then vec
+        if abs(p_hsh - t_hsh) <= 10 * m:
             t_vec = vectorizer.fit_transform([' '.join(txt[i+1:i + m+1])]).toarray()
             score = cosine_similarity(p_vec, t_vec)[0][0]
             res = max(res, score)
-            # print(txt[i+1:i + m+1], score)
-            # print(t_hsh)
     return res
 
 if __name__ == '__main__':

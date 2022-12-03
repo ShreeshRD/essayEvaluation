@@ -1,0 +1,6 @@
+student1,3.3131444,N/A
+student2,3.6009395,N/A
+admin,3.3131444,100.0% similarity with siddhi<br/>100.0% similarity with student1<br/>39.27% similarity with student2<br/>100.0% similarity with student3<br/>
+admin,0 - Please enter a valid answer.,N/A
+admin,"['9.317503', '9.688877', '9.807795']",0.0% similarity with report<br/>22.13% similarity with siddhi<br/>1.02% similarity with source<br/>22.13% similarity with student1<br/>24.58% similarity with student2<br/>22.13% similarity with student3<br/>
+admin,"['8.797278', '7.6531124', '7.846142']",0.0% similarity with report<br/>22.13% similarity with siddhi<br/>46.77% similarity with source<br/>22.13% similarity with student1<br/>43.82% similarity with student2<br/>22.13% similarity with student3<br/>

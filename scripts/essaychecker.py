@@ -3,6 +3,7 @@ import numpy as np
 import os
 from nltk.corpus import stopwords
 import re
+import nltk
 
 #lSTM
 from keras.layers import Embedding, LSTM, Dense, Dropout, Lambda, Flatten, Bidirectional, Conv1D
@@ -58,6 +59,15 @@ def essay_to_wordlist(essay_v, remove_stopwords):
         words = [w for w in words if not w in stops]
     return (words)
 
+def essay_to_sentences(essay_v, remove_stopwords = True):
+    tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
+    raw_sentences = tokenizer.tokenize(essay_v.strip())
+    sentences = []
+    for raw_sentence in raw_sentences:
+        if len(raw_sentence) > 0:
+            sentences.append(essay_to_wordlist(raw_sentence, remove_stopwords))
+    return sentences
+
 def makeFeatureVec(words, model, num_features):
     """Make Feature Vector from the words list of an Essay."""
     featureVec = np.zeros((num_features,),dtype="float32")
@@ -96,6 +106,7 @@ def evaluate(content):
     lstm_model = get_lstm()
     lstm_model.load_weights(cp+"/lstm.h5")
     lstm_preds = lstm_model.predict(testDataVecs)
+    print(lstm_preds)
     output.append(str(lstm_preds[0][0]))
 
     blstm_model = get_bi_lstm()

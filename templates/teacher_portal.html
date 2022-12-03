@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<body>
+    <div class="limiter">
+        <nav class="navbar navbar-expand-lg bg-nav-grad">
+            <div class="container-fluid">
+                <span style="font-size:30px;cursor:pointer;color:white" onclick="openNav()">&#9776;</span>
+                <p class="navbar-brand text-light" href="#">Teacher Portal</p>
+                <a class="btn btn-outline-dark btn-lg" href="/logout">Logout</a>
+            </div>
+        </nav>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="/teacher/1">View Results for Prompt 1</a>
+            <a href="/teacher/2">View Results for Prompt 2</a>
+            <a href="/teacher/3">View Results for Prompt 3</a>
+            <a href="/teacher/4">View Results for Prompt 4</a>
+            <a href="/teacher/5">View Results for Prompt 5</a>
+            <a href="/teacher/6">View Results for Prompt 6</a>
+            <a href="/teacher/7">View Results for Prompt 7</a>
+            <a href="/teacher/8">View Results for Prompt 8</a>
+        </div>
+        {%if res != '' %}
+        <div style="padding-top: 100px;">
+            <table class="table testwrap" style="margin: auto; width: 85%; font-size: large;">
+                <thead>
+                    <tr style="background-color: #382692; -webkit-text-fill-color: #dcdfe6; font-weight: 900;">
+                        <th scope="row">#</th>
+                        <th>Student Name</th>
+                        <th>Essay Score</th>
+                        <th>Plagiarism Score</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for i in range(0, res|length)%}
+                    <tr>
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{res[i][0]}}</td>
+                        <td>{{res[i][1]}}</td>
+                        <td>{{res[i][2] | safe}}</td>
+                        <td><a class="btn btn-info" href='{{ request.path }}/{{res[i][0]}}' target='_blank'>View
+                                Essay</a>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+
+        <script>
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "300px";
+            }
+
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+            }
+        </script>
+    </div>
+</body>
+{% endblock %}

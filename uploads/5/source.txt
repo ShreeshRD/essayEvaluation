@@ -1,0 +1,1 @@
+Describe the mood created by the author in the memoir. Support your answer with relevant and specific information from the memoir.

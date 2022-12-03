@@ -106,27 +106,17 @@ def threshold(gimg):
 def getText(file_path):
     rot = file_path
     img = cv2.imread(rot)
-    #inverted_image = cv2.bitwise_not(img)
     fix = deskew(img)
 
     gray_image = grayscale(fix)
-    #thresh, im_bw = cv2.threshold(gray_image, 210, 230, cv2.THRESH_BINARY)
     thresh = threshold(gray_image)
 
     no_noise = noise_removal(thresh)
-
-    #print(pytesseract.image_to_osd(Image.open(image_file)))
-    #print(pytesseract.image_to_osd(no_noise))
     cv2.imwrite("ocr_python_textbook/temp/rotated_fixed.jpg", no_noise)
-
-    #cv2.imwrite("temp/no_noise.jpg", no_noise)
-    #no_noise = "temp/no_noise.jpg"
-    #img = Image.open(no_noise)
 
     ocr_result = pytesseract.image_to_string(fix)
     return (ocr_result)
-    #display("ocr_python_textbook/temp/rotated_fixed.jpg")
-#display(rot)
+    
 if __name__ == "__main__":
     text = getText("test.png")
     print(text)
