@@ -18,7 +18,6 @@ def check_plagiarism(path):
     for filename in user_files:
         with open(path+'\\'+filename, 'r') as file:
             user_notes.append(txt_prep(file.read()))
-    # user_notes = [txt_prep(n) for n in user_notes]
     vectors = vectorize(user_notes)
     s_vectors = list(zip(user_files, vectors))
     plagiarism_results = []
@@ -44,7 +43,7 @@ def get_local_score(path, name, n):
 
 if __name__ == '__main__':
     n = 50 # Number of essays
-    path = 'D:\\capstone project\\CODE\\data'
+    path = 'E:\\Study\\Capstone\\PROJECT (code)\\DATAAAA'
     file_name = 'training_set_rel3.xlsx'
 
     for data in get_local_score(path, file_name, n):
