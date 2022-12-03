@@ -115,6 +115,7 @@ def teach_res(sid):
         csvreader = csv.reader(csvfile)
         for row in csvreader:
             res.append(row)
+        res = res[:-1]
     return render_template('teacher_portal.html', res = res)
 
 @app.route('/teacher/<int:sid>/<string:sname>', methods=['POST', 'GET'])
