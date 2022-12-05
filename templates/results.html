@@ -4,6 +4,7 @@
 	<nav class="navbar navbar-expand-lg bg-nav-grad">
 		<div class="container-fluid">
 		  <a class="btn btn-outline-dark btn-lg" style="color: #f0f0f0;" href="/">Home</a>
+		  <p class="navbar-brand text-light" href="#">User: {{user}}</p>
 		  <a class="btn btn-outline-dark btn-lg" href="/logout">Logout</a>
 		</div>
 	</nav>
@@ -11,7 +12,10 @@
 	<br/>
 	<div class="testwrap" style="margin: auto; width: 50%; text-align: center;">
 		<h2 class="display-5" style="padding-top: 50px; padding-bottom: 50px;">
-			Your grades are {{ res }}
+			Your grades are: <br/>
+			Rater 1 --> {{ res[0] }}<br/>
+			Rater 2 --> {{ res[1] }}<br/>
+			Rater 3 --> {{ res[2] }}
 		</h2>
 	</div>
 	<br/>
@@ -40,10 +44,31 @@
 		</div>
 	</div>
 	<br/>
-	<form class="validate-form" method="POST" target="_blank" action="/global" style="text-align: center; margin: auto; padding-bottom: 20px;">
-		<button class="btn btn-outline-dark btn-lg" style="margin: auto; width: 20%; text-align: center;">
-			Get global plagiarism report
-		</button>
-	</form>
+	<p style="text-align: center; padding-top: 20px; padding-bottom: 10px; padding-right: 25px;">
+		<a class="btn-lg btn-dark dropdown-toggle" data-bs-toggle="collapse" href="#globalCollapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+			Global Plagiarism
+		</a>
+	</p>
+	<div class="collapse" id="globalCollapse">
+		<div class="card-body bg-grad">
+			<div style="margin: auto; width: 80%;">
+				<div class="testwrap" style="margin: auto; width: 50%; text-align: center;">
+					<h2 class="display-5" style="padding-top: 50px; padding-bottom: 50px;">
+						<form class="validate-form" method="POST" target="_blank" action="/global/2" style="text-align: center; margin: auto; padding-bottom: 20px;">
+							<button class="btn btn-outline-dark btn-lg" style="margin: auto; width: fit-content; text-align: center;">
+								Quick Check
+							</button>
+						</form>
+						<form class="validate-form" method="POST" target="_blank" action="/global/5" style="text-align: center; margin: auto; padding-bottom: 20px;">
+							<button class="btn btn-outline-dark btn-lg" style="margin: auto; width: fit-content; text-align: center;">
+								Detailed Check
+							</button>
+						</form>
+					</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 </div>
 {% endblock %}

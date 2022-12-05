@@ -5,12 +5,27 @@
 	<b>Report</b>
 </h1>
 <div style="margin: auto; width: 80%;">
-	<div id="content" class="testwrap" style="margin: auto; width: 90%; text-align: center;">
-		<h2 class="display-5" style="padding-top: 50px; padding-bottom: 50px;">
-			Plagiarised lines:<br/>
-			{{ glob|safe }}<br/>
-		</h2>
-	</div>
+	<h2 class="display-5" style="padding-top: 50px; padding-bottom: 50px;">
+		Plagiarised lines:<br/>
+	</h2>
+	<table class="table testwrap" style="margin: auto; width: 85%;">
+		<thead>
+			<tr style="background-color: #382692; -webkit-text-fill-color: #dcdfe6; font-weight: 900;">
+				<th scope="col">Line</th>
+				<th scope="col">Text</th>
+				<th scope="col">Score</th>
+				<th scope="col">Link</th>
+			</tr>
+		</thead>
+		{% for line in glob %}
+			<tr class="clickable-row" data-href="_blank">
+				<th scope="row">{{ line[0] }}</th>
+				<td>{{ line[1] }}</td>
+				<td>{{ line[2] }}</td>
+				<td><a style="text-decoration: underline; font-size: 17px;" class="txt1" href = "{{ line[3] }}">link</a></td>
+			</tr>
+		{% endfor %}
+	</table>
 </div>
 <footer><p class="fixed-bottom" style="text-align:left;">Time taken: {{ time }}</p></footer>
 {% endblock %}

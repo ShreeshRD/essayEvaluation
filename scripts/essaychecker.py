@@ -90,7 +90,7 @@ def getAvgFeatureVecs(essays, model, num_features):
     return essayFeatureVecs
 
 def evaluate(content):
-    cp = r'C:/Users/Shreesh/Programs/Capstone/Project/scripts/modelWeights'
+    cp = r'C:/Users/Shreesh/Programs/Capstone/essayEvaluation/scripts/modelWeights'
 
     #content = """Dear @ORGANIZATION1, @CAPS1 has been brought to my attention that some people feel that computers are bad for us. Some people say that they are a distraction to our physicaland mental health. Although I can see how some people would think this, I believe that computers are a good benifit to all society. I believe this because computers can help people learn, stay intach with friends or family that live faraway, and stay orginized. Sometimes people are on the computer, learning and they don't even know @CAPS1. Simply by visiting the @ORGANIZATION2 homepage, you automaticly see the news feeds of things happening around the world. Other times people go online diliberatly to learn. If someone is thinking about going to @LOCATION1 then they would probably go on the internet to learn about @CAPS1. Simply by searching equadore many choices will pop up you climate, sesonal weather, hotel options, and other farts. But thats not the only way people are learning on the internet. Now, many college students have the option of taking their lessons online. This is because some students like calm quietness or own house the distractions of sitting in class. Friends could be a big distraction in class, but how can you stay intouch with your friends if they moved away? I remember in second grade my bestfriend, @LOCATION2, move away. I was so sad. I badey ever talked to her, but then one day our parents set us up on a vidio chat! I felt like I was right their with her! This was great, and I though about how many people could use this to talk to relatives or friends. Another great way to stay intouch into friends and family is through e-mail. By writing a message and sending @CAPS1 can make staying in touch so easey, and your personal wants can chat and emails are a easey thing to send world wide. So many people love to type on a keyboard as well, but so many different papers that you type could be lost. I, for me, hate clutter, and I have so many school binders for papers to be lost in. This is why I take great advantage of typing my paper every chance I get. My computer keeps me orginiced because I could never loose my work. File save, is an idiot proof way to keep all your files in a safe place. Then all you have to do is press print to get a hard copy. I am sure that many people love using their computer for the same reason. Also, I myself am a much faster typer than I am writer so my work is a lot needey on the computer. As you can see their are plenty of reasons why using a computer is goof for our society you can learn, stay intouch with friends and family, and stay orginiced. Many people, could agree with me. Don't you?"""
 
@@ -107,17 +107,17 @@ def evaluate(content):
     lstm_model.load_weights(cp+"/lstm.h5")
     lstm_preds = lstm_model.predict(testDataVecs)
     print(lstm_preds)
-    output.append(str(lstm_preds[0][0]))
+    output.append(str(round(lstm_preds[0][0],2)))
 
     blstm_model = get_bi_lstm()
     blstm_model.load_weights(cp+"/bi_lstm.h5")
     blstm_preds = blstm_model.predict(testDataVecs)
-    output.append(str(blstm_preds[0][0]))
+    output.append(str(round(blstm_preds[0][0],2)))
 
     cnn_lstm_model = get_cnn_lstm()
     cnn_lstm_model.load_weights(cp+"/cnn_lstm.h5")
     cnn_lstm_preds = cnn_lstm_model.predict(testDataVecs)
-    output.append(str(cnn_lstm_preds[0][0]))
+    output.append(str(round(cnn_lstm_preds[0][0],2)))
     return output
 
 if __name__ == "__main__":

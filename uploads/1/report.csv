@@ -1,6 +1,27 @@
-student1,3.3131444,N/A
-student2,3.6009395,N/A
-admin,3.3131444,100.0% similarity with siddhi<br/>100.0% similarity with student1<br/>39.27% similarity with student2<br/>100.0% similarity with student3<br/>
-admin,0 - Please enter a valid answer.,N/A
-admin,"['9.317503', '9.688877', '9.807795']",0.0% similarity with report<br/>22.13% similarity with siddhi<br/>1.02% similarity with source<br/>22.13% similarity with student1<br/>24.58% similarity with student2<br/>22.13% similarity with student3<br/>
-admin,"['8.797278', '7.6531124', '7.846142']",0.0% similarity with report<br/>22.13% similarity with siddhi<br/>46.77% similarity with source<br/>22.13% similarity with student1<br/>43.82% similarity with student2<br/>22.13% similarity with student3<br/>
+Aditya,0 - Please enter a valid answer.,Copied from question
+Aditya,0 - Please enter a valid answer.,Copied from question
+Aditya,"['9.317503', '9.688877', '9.807795']",0.0% similarity with report<br/>22.13% similarity with siddhi<br/>1.02% similarity with source<br/>22.13% similarity with Shishir<br/>24.58% similarity with student2<br/>22.13% similarity with student3<br/>
+Aditya,"['8.797278', '7.6531124', '7.846142']",0.0% similarity with report<br/>22.13% similarity with siddhi<br/>46.77% similarity with source<br/>22.13% similarity with Shishir<br/>43.82% similarity with student2<br/>22.13% similarity with student3<br/>
+Aditya,"['8.801859', '7.6680965', '7.8657494']",0.0% similarity with report<br/>23.79% similarity with siddhi<br/>36.42% similarity with source<br/>23.79% similarity with Shishir<br/>43.06% similarity with student2<br/>23.79% similarity with student3<br/>
+Aditya,"['8.801859', '7.6680965', '7.8657494']",36.42% similarity with source<br/>23.79% similarity with siddhi<br/>23.79% similarity with Shishir<br/>43.06% similarity with student2<br/>23.79% similarity with student3<br/>
+Aditya,"['8.797278', '7.6531124', '7.846142']",46.77% similarity with source<br/>22.13% similarity with siddhi<br/>22.13% similarity with Shishir<br/>43.82% similarity with student2<br/>22.13% similarity with student3<br/>
+Aditya,0 - Please enter a valid answer.,Copied from question
+Aditya,0 - Please enter a valid answer.,Copied from question
+Aditya,0 - Please enter a valid answer.,Copied from question
+Aditya,"['6.876791', '6.030078', '6.019338']",26.06% similarity with source<br/>13.36% similarity with siddhi<br/>13.36% similarity with Shishir<br/>90.95% similarity with student2<br/>13.36% similarity with student3<br/>
+Aditya,"['8.623464', '7.1849704', '5.5430584']",87.5% similarity with source<br/>14.43% similarity with siddhi<br/>14.43% similarity with Shishir<br/>87.5% similarity with student2<br/>14.43% similarity with student3<br/>
+Aditya,0 - Please enter a valid answer.,Copied from question
+Aditya,"['8.714684', '8.286528', '8.460623']",0.0% similarity with source<br/>99.95% similarity with siddhi<br/>100.0% similarity with Shishir<br/>45.86% similarity with student2<br/>100.0% similarity with student3<br/>
+Aditya,"['8.714684', '8.286528', '8.460623']",0.0% similarity with source<br/>99.95% similarity with siddhi<br/>100.0% similarity with Shishir<br/>45.86% similarity with student2<br/>100.0% similarity with student3<br/>
+Aditya,"['nan', 'nan', 'nan']",0% similarity with source<br/>0% similarity with siddhi<br/>0% similarity with Shishir<br/>0% similarity with student2<br/>0% similarity with student3<br/>
+Aditya,0 - Please enter a valid answer.,Copied from question
+Aditya,"['6.6015415', '6.325097', '4.080266']",0% similarity with source<br/>38.25% similarity with siddhi<br/>38.25% similarity with Shishir<br/>49.86% similarity with student2<br/>38.25% similarity with student3<br/>
+Aditya,"['8.322418', '7.524949', '7.920727']",0.0% similarity with source<br/>47.4% similarity with siddhi<br/>47.4% similarity with Shishir<br/>0% similarity with student2<br/>47.4% similarity with student3<br/>
+Aditya,0 - Please enter a valid answer.,Copied from question
+Shreesh,"['9.072986', '8.867276', '8.893761']",13.56% similarity with source<br/>13.56% similarity with Aditya<br/>0.0% similarity with siddhi<br/>0.0% similarity with Shishir<br/>0.0% similarity with student2<br/>0.0% similarity with student3<br/>
+Shreesh,"['9.072986', '8.867276', '8.893761']",13.56% similarity with source<br/>13.56% similarity with Aditya<br/>0.0% similarity with siddhi<br/>0.0% similarity with Shishir<br/>0.0% similarity with student2<br/>0.0% similarity with student3<br/>
+Shreesh,"['9.072986', '8.867276', '8.893761']",13.56% similarity with source<br/>13.56% similarity with Aditya<br/>
+Shreesh,"['9.072986', '8.867276', '8.893761']",13.56% similarity with source<br/>13.56% similarity with admin<br/>4.83% similarity with god<br/>
+Shreesh,"['9.072986', '8.867276', '8.893761']",13.56% similarity with source<br/>13.56% similarity with admin<br/>4.83% similarity with god<br/>
+Shreesh,"['9.072986', '8.867276', '8.893761']",13.56% similarity with source<br/>13.56% similarity with admin<br/>4.83% similarity with god<br/>
+Shreesh,"['9.07', '8.87', '8.89']",13.56% similarity with source<br/>13.56% similarity with admin<br/>4.83% similarity with god<br/>

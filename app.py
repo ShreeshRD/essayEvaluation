@@ -5,7 +5,7 @@ from flask_bcrypt import Bcrypt
 from PIL import Image
 import pytesseract
 import scripts.globalPlag.global_plag as gplag
-import scripts.localPlag.fake_lpag as lplag
+import scripts.localPlag.local_plag as lplag
 import time
 import csv
 
@@ -42,7 +42,7 @@ def index():
         return render_template('teacher_portal.html', res= '')
     elif session.get('logged_in'):
         prs = Prompts.query.all()
-        return render_template('home.html', prompts = prs)
+        return render_template('home.html', user = session["uname"], prompts = prs)
     else:
         return render_template('index.html', message="Hello!")
 
@@ -64,7 +64,7 @@ def prompt(sid):
     if src.source_essay == "YES":
         with open('templates/src_essays/p'+str(sid)+'.htm','r') as file:
             html = file.read()
-    return render_template('prompt.html', no = str(sid), source = src, content = html, ocr = txt)
+    return render_template('prompt.html', user = session["uname"], no = str(sid), source = src, content = html, ocr = txt)
 
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
@@ -143,12 +143,12 @@ def takeInput():
     d_file.close()
     score = evaluate(t)
     path = '.\\uploads\\'
-    l_results = lplag.lscores(name, t, "C:/Users/Shreesh/Programs/Capstone/Project/uploads/"+no)
+    l_results = lplag.lscores(name, t, "C:/Users/Shreesh/Programs/Capstone/essayEvaluation/uploads/"+no)
     lscore = ''
     for ele in l_results:
-        if "source" in ele and int(ele[:2]) > 90:
+        if ele[0] == "C":
             score = "0 - Please enter a valid answer."
-            lscore = "N/A"
+            lscore = ele
             break
         lscore += ele + '<br/>'
     session["score"] = max(score)
@@ -163,15 +163,15 @@ def takeInput():
     with open(filename, 'a') as csvfile: 
         csvwriter = csv.writer(csvfile, lineterminator='\n')
         csvwriter.writerow(res)
-    return render_template('results.html', res = score, loc = lscore)
+    return render_template('results.html', user = session["uname"], res = score, loc = lscore)
 
-@app.route('/global', methods=['POST'])
-def background_process_test():
+@app.route('/global/<int:mode>', methods=['POST', 'GET'])
+def background_process_test(mode):
     t = session["essay"]
     if len(t.split()) > 5:
         tic = time.time()
         time.sleep(10)
-        gscore = gplag.get_global_score(t)#'text --> 77% match with link: <a style="text-decoration: underline;" class="display-5">link<a/>"'
+        gscore = gplag.get_global_score(t, mode)#'text --> 77% match with link: <a style="text-decoration: underline;" class="display-5">link<a/>"'
         tic = time.time() - tic
     else:
         gscore = 0

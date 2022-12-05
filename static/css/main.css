@@ -77,10 +77,10 @@ a:hover {
 }
 
 div#loading {
-  width: 35px;
-  height: 35px;
+  width: 200px;
+  height: 200px;
   display: none;
-  background: url(/static/loadingimage.gif) no-repeat;
+  background: url(/static/newloading.gif) no-repeat;
   cursor: wait;
 }
 
